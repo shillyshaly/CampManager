@@ -1,13 +1,12 @@
 import java.sql.*;
-import java.util.Scanner;
 
 public class MySQLConnect {
     static Connection connection = null;
     static String url = null;
     static PreparedStatement statement = null;
 
-    public static mySQLConnect(){
-        url = "jdbc:mysql://0.0.0.0/campDB?user=root&password=team4";
+    public static Connection mySQLConn() throws SQLException {
+        url = "jdbc:mysql://0.0.0.0/CampDB?user=root&password=team4";
 
         connection = DriverManager.getConnection(url);
         connection.setAutoCommit(false);
@@ -23,5 +22,6 @@ public class MySQLConnect {
         connection.commit();
 
         connection.setAutoCommit(false);
+        return connection;
     }
 }
