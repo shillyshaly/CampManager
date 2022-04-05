@@ -5,7 +5,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         int exitCode = 0;
-        Connection connection = MySQLConnect.mySQLConn();
+        MySQLConnect.mySQLConn();
 
         while (exitCode == 0) {
 

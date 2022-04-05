@@ -19,15 +19,15 @@ public class Camper {
 
     public static void newCamper() throws SQLException {
 
-        String camper = "INSERT IGNORE INTO camper VALUES (?, ?, ?, ?, ?, ?)";
+        String camper = "INSERT INTO camper (camper_fname, camper_lname, camper_age, camper_house, camper_docs) VALUES (?, ?, ?, ?, ?)";
         String inc = "select max(`camper_id`) as camper_id from `camper`;";
 
         //need to get row id somhow
         statement = connection.prepareStatement(inc);
         rs = statement.executeQuery(inc);
         rs.next();
-        int id = rs.getInt("camper_id") + 1;
-        System.out.println("id: " + id);
+//        int id = rs.getInt("camper_id") + 1;
+//        System.out.println("id: " + id);
 
         Scanner scanner = new Scanner(System.in);
 //        System.out.println("enter id: ");
@@ -45,12 +45,11 @@ public class Camper {
 
         //sql insert statement for camper table (test)
         statement = connection.prepareStatement(camper);
-        statement.setInt(1, id);
-        statement.setString(2, fname);
-        statement.setString(3, lname);
-        statement.setInt(4, age);
-        statement.setString(5, house);
-        statement.setString(6, complete);
+        statement.setString(1, fname);
+        statement.setString(2, lname);
+        statement.setInt(3, age);
+        statement.setString(4, house);
+        statement.setString(5, complete);
 
         System.out.println(statement);
 
