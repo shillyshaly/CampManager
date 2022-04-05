@@ -19,13 +19,13 @@ public class Camper {
 
     public static void newCamper() throws SQLException {
 
-        String camper = "INSERT INTO camper (camper_fname, camper_lname, camper_age, camper_house, camper_docs) VALUES (?, ?, ?, ?, ?)";
-        String inc = "select max(`camper_id`) as camper_id from `camper`;";
+        String camper = "INSERT INTO camper (camper_fname, camper_lname, camper_age, camper_house, camper_docs)" +
+                " VALUES (?, ?, ?, ?, ?)";
+//        String inc = "select max(`camper_id`) as camper_id from `camper`;";
 
-        //need to get row id somhow
-        statement = connection.prepareStatement(inc);
-        rs = statement.executeQuery(inc);
-        rs.next();
+//        statement = connection.prepareStatement(inc);
+//        rs = statement.executeQuery(inc);
+//        rs.next();
 //        int id = rs.getInt("camper_id") + 1;
 //        System.out.println("id: " + id);
 
@@ -84,19 +84,8 @@ public class Camper {
         statement = connection.prepareStatement(query);
         ResultSet rs = statement.executeQuery(query);
 
-        int longLength = 18;
-        int shortLength = 4;
-
-//        System.out.format(StringUtils.padString("Id", shortLength) + "|  " +
-//                StringUtils.padString("First Name", longLength) + "|  " +
-//                StringUtils.padString("Last Name", longLength) + "|  " +
-//                StringUtils.padString("Age", longLength) + "|  " +
-//                StringUtils.padString("Bunk House", longLength) + "|  " +
-//                StringUtils.padString("Docs Complete", longLength) + "|\n"
-//        );
-
-        while (rs.next())
-        {
+        while (rs.next()) {
+            //save and parse the query response
             int id = rs.getInt("camper_id");
             String fname = rs.getString("camper_fname");
             String lname = rs.getString("camper_lname");
@@ -104,15 +93,12 @@ public class Camper {
             String house = rs.getString("camper_house");
             String complete = rs.getString("camper_docs");
 
-            // print the results
-//            System.out.format(StringUtils.padString(String.valueOf(id), shortLength) + "|  " +
-//                    StringUtils.padString(fname, longLength) + "|  " +
-//                    StringUtils.padString(lname, longLength) + "|  " +
-//                    StringUtils.padString(String.valueOf(age), longLength) + "|  " +
-//                    StringUtils.padString(house, longLength) + "|  " +
-//                    StringUtils.padString(complete, longLength) + "|\n"
-//            );
+            //print the results of query
+            System.out.format("ID: %-3s First: %-10s Last: %-12s Age: %-3s BunkHouse: %-3s " +
+                    "Completed docs: %-3s\n" +
+                    "", id, fname, lname, age, house, complete);
         }
         statement.close();
+        System.out.println("\n\n");
     }
 }
