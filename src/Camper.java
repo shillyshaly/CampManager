@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class Camper {
     static PreparedStatement statement = null;
     static Connection connection;
+    static ResultSet rs = null;
+
 
     static {
         try {
@@ -17,12 +19,19 @@ public class Camper {
 
     public static void newCamper() throws SQLException {
 
+        String camper = "INSERT IGNORE INTO camper VALUES (?, ?, ?, ?, ?, ?)";
+        String inc = "select max(`camper_id`) as camper_id from `camper`;";
 
-        String camper = "INSERT INTO camper VALUES (?, ?, ?, ?, ?, ?)";
+        //need to get row id somhow
+        statement = connection.prepareStatement(inc);
+        rs = statement.executeQuery(inc);
+        rs.next();
+        int id = rs.getInt("camper_id") + 1;
+        System.out.println("id: " + id);
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("enter id: ");
-        String id = scanner.next();
+//        System.out.println("enter id: ");
+//        int id = scanner.nextInt();
         System.out.println("enter first name: ");
         String fname = scanner.next();
         System.out.println("enter last name: ");
@@ -36,7 +45,7 @@ public class Camper {
 
         //sql insert statement for camper table (test)
         statement = connection.prepareStatement(camper);
-        statement.setString(1, id);
+        statement.setInt(1, id);
         statement.setString(2, fname);
         statement.setString(3, lname);
         statement.setInt(4, age);
@@ -58,13 +67,16 @@ public class Camper {
         System.out.println("Enter last name: ");
         String lname = scanner.next();
 
-        String query = "DELETE FROM camper WHERE camper_first_name='" + fname + "' and " +
-                "camper_last_name='" + lname + "';";
+        String query = "DELETE FROM camper WHERE camper_fname='" + fname + "' and " +
+                "camper_lname='" + lname + "';";
 
         statement = connection.prepareStatement(query);
         statement.execute();
         connection.commit();
         System.out.println("Record of " + fname + " " + lname + " has been deleted.");
+        statement = connection.prepareStatement("alter table camper auto_increment=1;");
+        statement.execute();
+        connection.commit();
     }
 
     public static void getCampers() throws SQLException {
@@ -87,11 +99,11 @@ public class Camper {
         while (rs.next())
         {
             int id = rs.getInt("camper_id");
-            String fname = rs.getString("camper_first_name");
-            String lname = rs.getString("camper_last_name");
+            String fname = rs.getString("camper_fname");
+            String lname = rs.getString("camper_lname");
             int age = rs.getInt("camper_age");
-            String house = rs.getString("bunk_house");
-            String complete = rs.getString("completed_docs");
+            String house = rs.getString("camper_house");
+            String complete = rs.getString("camper_docs");
 
             // print the results
             System.out.format(StringUtils.padString(String.valueOf(id), shortLength) + "|  " +

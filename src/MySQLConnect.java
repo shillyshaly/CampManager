@@ -6,7 +6,7 @@ public class MySQLConnect {
     static PreparedStatement statement = null;
 
     public static Connection mySQLConn() throws SQLException {
-        url = "jdbc:mysql://0.0.0.0/CampDB?user=root&password=team4";
+        url = "jdbc:mysql://0.0.0.0/testDB?user=root&password=password";
 
         connection = DriverManager.getConnection(url);
         connection.setAutoCommit(false);
