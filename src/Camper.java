@@ -1,4 +1,4 @@
-import com.mysql.cj.util.StringUtils;
+//import com.mysql.cj.util.StringUtils;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -87,13 +87,13 @@ public class Camper {
         int longLength = 18;
         int shortLength = 4;
 
-        System.out.format(StringUtils.padString("Id", shortLength) + "|  " +
-                StringUtils.padString("First Name", longLength) + "|  " +
-                StringUtils.padString("Last Name", longLength) + "|  " +
-                StringUtils.padString("Age", longLength) + "|  " +
-                StringUtils.padString("Bunk House", longLength) + "|  " +
-                StringUtils.padString("Docs Complete", longLength) + "|\n"
-        );
+//        System.out.format(StringUtils.padString("Id", shortLength) + "|  " +
+//                StringUtils.padString("First Name", longLength) + "|  " +
+//                StringUtils.padString("Last Name", longLength) + "|  " +
+//                StringUtils.padString("Age", longLength) + "|  " +
+//                StringUtils.padString("Bunk House", longLength) + "|  " +
+//                StringUtils.padString("Docs Complete", longLength) + "|\n"
+//        );
 
         while (rs.next())
         {
@@ -105,13 +105,13 @@ public class Camper {
             String complete = rs.getString("camper_docs");
 
             // print the results
-            System.out.format(StringUtils.padString(String.valueOf(id), shortLength) + "|  " +
-                    StringUtils.padString(fname, longLength) + "|  " +
-                    StringUtils.padString(lname, longLength) + "|  " +
-                    StringUtils.padString(String.valueOf(age), longLength) + "|  " +
-                    StringUtils.padString(house, longLength) + "|  " +
-                    StringUtils.padString(complete, longLength) + "|\n"
-            );
+//            System.out.format(StringUtils.padString(String.valueOf(id), shortLength) + "|  " +
+//                    StringUtils.padString(fname, longLength) + "|  " +
+//                    StringUtils.padString(lname, longLength) + "|  " +
+//                    StringUtils.padString(String.valueOf(age), longLength) + "|  " +
+//                    StringUtils.padString(house, longLength) + "|  " +
+//                    StringUtils.padString(complete, longLength) + "|\n"
+//            );
         }
         statement.close();
     }
