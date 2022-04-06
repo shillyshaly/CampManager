@@ -1,5 +1,3 @@
-FROM java:8
-COPY . /
-WORKDIR /
-RUN javac Main.java
-CMD ["java", "-classpath", "mysql-connector-java-8.0.26.jar:.","Main.java"]
+FROM mysql
+ENV MYSQL_DATABASE Camp_Manager
+COPY ./startUp.sql /docker-entrypoint-initdb.d/

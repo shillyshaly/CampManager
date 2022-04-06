@@ -6,7 +6,7 @@ public class MySQLConnect {
     static PreparedStatement statement = null;
 
     public static Connection mySQLConn() throws SQLException {
-        url = "jdbc:mysql://ec2-44-203-193-250.compute-1.amazonaws.com:3306/Camp_Manager?user=root&password=comp350";
+        url = "jdbc:mysql://0.0.0.0:3306/Camp_Manager?user=root&password=team4";
 
         connection = DriverManager.getConnection(url);
         connection.setAutoCommit(false);
