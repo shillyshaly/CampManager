@@ -12,14 +12,7 @@ public class MySQLConnect {
         connection.setAutoCommit(false);
 
         //get rid of warnings
-        statement = connection.prepareStatement("SET FOREIGN_KEY_CHECKS = 0;");
-        statement.addBatch();
-        statement.executeBatch();
-        connection.commit();
-        statement = connection.prepareStatement("SET sql_safe_updates = 0;");
-        statement.addBatch();
-        statement.executeBatch();
-        connection.commit();
+
 
         connection.setAutoCommit(false);
         return connection;

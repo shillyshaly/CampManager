@@ -51,7 +51,7 @@ public class Camper {
         statement.setString(4, house);
         statement.setString(5, complete);
 
-        System.out.println(statement);
+//        System.out.println(statement);
 
         //add, execute, commit to db
         statement.addBatch();
@@ -82,7 +82,7 @@ public class Camper {
         String query = "SELECT * FROM camper;";
 
         statement = connection.prepareStatement(query);
-        ResultSet rs = statement.executeQuery(query);
+        rs = statement.executeQuery(query);
 
         while (rs.next()) {
             //save and parse the query response
@@ -100,5 +100,16 @@ public class Camper {
         }
         statement.close();
         System.out.println("\n\n");
+    }
+
+    public static ResultSet getCamperDeats(String fname, String lname) throws SQLException {
+        String query = "SELECT * FROM camper WHERE camper_fname = \"" + fname + "\" && " + "camper_lname = \"" +
+                lname +"\";";
+
+        statement = connection.prepareStatement(query);
+        rs = statement.executeQuery(query);
+        rs.next();
+
+        return rs;
     }
 }
