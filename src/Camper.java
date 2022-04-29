@@ -19,37 +19,34 @@ public class Camper {
 
     public static void newCamper() throws SQLException {
 
-        String camper = "INSERT INTO camper (camper_fname, camper_lname, camper_age, camper_house, camper_docs)" +
-                " VALUES (?, ?, ?, ?, ?)";
-//        String inc = "select max(`camper_id`) as camper_id from `camper`;";
-
-//        statement = connection.prepareStatement(inc);
-//        rs = statement.executeQuery(inc);
-//        rs.next();
-//        int id = rs.getInt("camper_id") + 1;
-//        System.out.println("id: " + id);
+        String camper = "INSERT INTO camper (camper_fname, camper_lname, camper_age, camper_dob, camper_docs, session_month, camper_gender)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         Scanner scanner = new Scanner(System.in);
-//        System.out.println("enter id: ");
-//        int id = scanner.nextInt();
         System.out.println("enter first name: ");
         String fname = scanner.next();
         System.out.println("enter last name: ");
         String lname = scanner.next();
         System.out.println("enter age: ");
         int age = scanner.nextInt();
-        System.out.println("enter bunk house(a-e): ");
-        String house = scanner.next();
+        System.out.println("enter date of birth (ex. dd/mm/yyyy): ");
+        String dob = scanner.next();
         System.out.println("enter completed docs(y/n): ");
         String complete = scanner.next();
+        System.out.println("enter session month (ex. august");
+        String session = scanner.next();
+        System.out.println("enter gender (ex. male/female): ");
+        String gender = scanner.next();
 
         //sql insert statement for camper table (test)
         statement = connection.prepareStatement(camper);
         statement.setString(1, fname);
         statement.setString(2, lname);
         statement.setInt(3, age);
-        statement.setString(4, house);
+        statement.setString(4, dob);
         statement.setString(5, complete);
+        statement.setString(6, session);
+        statement.setString(7, gender);
 
 //        System.out.println(statement);
 
@@ -58,6 +55,8 @@ public class Camper {
         statement.executeBatch();
         connection.commit();
     }
+
+
 
     public static void delCamper() throws SQLException {
         System.out.println("Enter first name of camper to be deleted: ");
@@ -76,6 +75,8 @@ public class Camper {
         statement = connection.prepareStatement("alter table camper auto_increment=1;");
         statement.execute();
         connection.commit();
+
+        getCampers();
     }
 
     public static void getCampers() throws SQLException {
@@ -90,13 +91,15 @@ public class Camper {
             String fname = rs.getString("camper_fname");
             String lname = rs.getString("camper_lname");
             int age = rs.getInt("camper_age");
-            String house = rs.getString("camper_house");
+            String dob = rs.getString("camper_dob");
             String complete = rs.getString("camper_docs");
+            String session = rs.getString("session_month");
+            String gender = rs.getString("camper_gender");
 
             //print the results of query
-            System.out.format("ID: %-3s First: %-10s Last: %-12s Age: %-3s BunkHouse: %-3s " +
-                    "Completed docs: %-3s\n" +
-                    "", id, fname, lname, age, house, complete);
+            System.out.format("ID: %-5s First: %-10s Last: %-12s Age: %-3s D.O.B.: %-12s " +
+                    "Completed docs: %-3s Session: %-10s Gender: %-10s\n" +
+                    "", id, fname, lname, age, dob, complete, session, gender);
         }
         statement.close();
         System.out.println("\n\n");

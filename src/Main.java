@@ -20,16 +20,27 @@ public class Main {
             int menuChoice = MenuList.mainMenu();
 
             switch (menuChoice){
+                //camper menu
                 case 1:
-                    MenuList.camperMenu();
-//                    Camper.newCamper();
+                    int exitCamper = 0;
+                    while (exitCamper != 4){
+                        MenuList.camperMenu();
+                        if ((exitCamper = MenuList.camperMenu()) == 4){break;}
+                    }
                     break;
+                //tribe menu
                 case 2:
-                    Camper.getCampers();
+                    int exitTribe = 0;
+                    while (exitTribe != 5){
+                        MenuList.tribesMenu();
+                        if ((exitTribe = MenuList.tribesMenu()) == 5){break;}
+                    }
                     break;
+                //coming soon
                 case 3:
-                    Camper.delCamper();
+                    System.out.println("coming soon");
                     break;
+                //testing getCamperDeats func
                 case 4:
                     System.out.print("Enter camper name(first last): ");
                     Scanner scanner = new Scanner(System.in);
@@ -40,6 +51,7 @@ public class Main {
                     int id = rs.getInt("camper_id");
                     System.out.println("CAMPER ID:: " + id);
                     break;
+                //EXIT
                 case 5:
                     System.out.println("Exiting Camp Manager...");
                     System.out.println("Good Bye");
