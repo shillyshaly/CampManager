@@ -31,25 +31,24 @@ public class Tribes {
         System.out.println("Enter camper name to add (ex. billy thompson): ");
         String fname = scanner.next();
         String lname = scanner.next();
-        System.out.println("Enter tribe to add camper to");
-        scanner.nextLine();
-        String tribe = scanner.nextLine();
+        System.out.println("Enter tribe to add camper to (a - d): ");
+        char tribe = scanner.next().charAt(0);
 
-        //ask for session month, age and special req's
-        System.out.println("Which session will the camper attend (june, july, august): ");
-        String month = scanner.next();
-        System.out.println("Enter camper age: ");
-        int age = scanner.nextInt();
+        //test area
+        ResultSet camper = Camper.getCamperDeats(fname, lname);
+        String session = camper.getString("session_month");
+        int age = camper.getInt("camper_age");
+
         System.out.println("Are there any special requests?: ");
         scanner.nextLine();
         String spReq = scanner.nextLine();
 
         //prep statment
         statement = connection.prepareStatement(query);
-        statement.setString(1, tribe);
+        statement.setString(1, String.valueOf(tribe));
         statement.setString(2, fname);
         statement.setString(3, lname);
-        statement.setString(4, month);
+        statement.setString(4, session);
         statement.setString(5, spReq);
         statement.setInt(6, age);
 
@@ -59,10 +58,31 @@ public class Tribes {
         connection.commit();
     }
 
-    //move tribe
-    public static void moveTribes(String tribe, String fname, String lname) throws SQLException {
+    //display resultSet
+    public static void displayRS(ResultSet rs) throws SQLException {
+        System.out.println("+-------------------+-------------------+--------------------+---------------------" +
+                "+------------+-----------------------------------------------+");
+        while (rs.next()){
+            //save and parse query response
+            String tr = rs.getString("tribe_name");
+            String fname = rs.getString("camper_fname");
+            String lname = rs.getString("camper_lname");
+            String sess = rs.getString("session_month");
+            String spReq = rs.getString("special_req");
+            int age = rs.getInt("camper_age");
 
-        String query = "UPDATE tribe SET tribe_name = \"" + tribe + "\" where camper_fname = \"" + fname + "\" and " +
+            //print the result set
+            System.out.format("| Tribe: %-10s | First: %-10s | Last: %-12s | Session: %-10s | Age: %-5s | " +
+                    "Special Req: %-32s |\n", tr, fname, lname, sess, age, spReq);
+        }
+        System.out.println("+-------------------+-------------------+--------------------+---------------------" +
+                "+------------+-----------------------------------------------+\n\n");
+    }
+
+    //move tribe
+    public static void moveTribes(char tribe, String fname, String lname) throws SQLException {
+
+        String query = "UPDATE tribe SET tribe_name = \"tribe " + tribe + "\" where camper_fname = \"" + fname + "\" and " +
                 "camper_lname = \"" + lname + "\";";
 
         statement = connection.prepareStatement(query);
@@ -75,12 +95,12 @@ public class Tribes {
         statement = connection.prepareStatement(tribe);
         rs = statement.executeQuery(tribe);
         rs.next();
-        int count = rs.getInt("total");
-        return count;
+        return rs.getInt("total");
     }
 
     //tribe count
     public static void displayCount () throws SQLException {
+        //getting the count of each tribe
         String tribeA = "select count(*) as total from tribe where tribe_name = \"tribe a\";";
         String tribeB = "select count(*) as total from tribe where tribe_name = \"tribe b\";";
         String tribeC = "select count(*) as total from tribe where tribe_name = \"tribe c\";";
@@ -103,29 +123,12 @@ public class Tribes {
     }
 
     //display members of a tribe
-    public static void displayTribeMembers(String tribe, String session) throws SQLException{
-        String query = "SELECT * FROM tribe WHERE tribe_name = \"" + tribe + "\" and " +
+    public static void displayTribeMembers(char tribe, String session) throws SQLException{
+        String query = "SELECT * FROM tribe WHERE tribe_name = \"tribe " + tribe + "\" and " +
                 "session_month = \"" + session + "\";";
 
         statement = connection.prepareStatement(query);
         rs = statement.executeQuery(query);
-
-        System.out.println("+-------------------+-------------------+--------------------+---------------------" +
-                "+------------+-----------------------------------------------+");
-        while (rs.next()){
-            //save and parse query response
-            String tr = rs.getString("tribe_name");
-            String fname = rs.getString("camper_fname");
-            String lname = rs.getString("camper_lname");
-            String sess = rs.getString("session_month");
-            String spReq = rs.getString("special_req");
-            int age = rs.getInt("camper_age");
-
-            //print the result set
-            System.out.format("| Tribe: %-10s | First: %-10s | Last: %-12s | Session: %-10s | Age: %-5s | " +
-                    "Special Req: %-32s |\n", tr, fname, lname, sess, age, spReq);
-        }
-        System.out.println("+-------------------+-------------------+--------------------+---------------------" +
-                "+------------+-----------------------------------------------+\n\n");
+        displayRS(rs);
     }
 }

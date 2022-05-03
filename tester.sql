@@ -16,3 +16,7 @@ select count(*) from tribe;
 
 alter table tribe add camper_fname varchar(32), add camper_lname varchar(32), add gender char(8);
 alter table tribe add camper_gender varchar(8), add session_month varchar(12), add special_req varchar(255);
+
+update tribe set tribe_name = "a" where tribe_name = "tribe a";
+
+select avg(camper_age) as age from tribe where tribe_name = "c";

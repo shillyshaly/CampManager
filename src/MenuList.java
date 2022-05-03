@@ -74,7 +74,7 @@ public class MenuList {
 
         String fname;
         String lname;
-        String tribe;
+        char tribe;
 
         switch (menuChoice){
             case 1:
@@ -91,14 +91,18 @@ public class MenuList {
                 lname = scanner.next();
                 System.out.println("Enter camper's new tribe: ");
                 scanner.nextLine();
-                tribe = scanner.nextLine();
+                tribe = scanner.next().charAt(0);
                 Tribes.moveTribes(tribe, fname, lname);
                 break;
             case 3:
                 Tribes.displayCount();
                 break;
             case 4:
-                Tribes.displayTribeMembers("tribe a", "june");
+                System.out.println("Enter tribe to display (a - d): ");
+                tribe = scanner.next().charAt(0);
+                System.out.println("For which session (June, July, August):");
+                String session = scanner.next();
+                Tribes.displayTribeMembers(tribe, session);
                 break;
             case 5:
                 System.out.println("Leaving Tribes Menu...");
