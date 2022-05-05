@@ -78,11 +78,6 @@ public class MenuList {
 
         switch (menuChoice){
             case 1:
-//                System.out.println("Enter camper name to add(ex billy thompson): ");
-//                fname = scanner.next();
-//                lname = scanner.next();
-//                System.out.println("Enter tribe to add camper to");
-//                tribe = scanner.next();
                 Tribes.addToTribe();
                 break;
             case 2:

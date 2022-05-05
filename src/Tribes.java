@@ -39,6 +39,8 @@ public class Tribes {
         String session = camper.getString("session_month");
         int age = camper.getInt("camper_age");
 
+
+
         System.out.println("Are there any special requests?: ");
         scanner.nextLine();
         String spReq = scanner.nextLine();
@@ -124,7 +126,7 @@ public class Tribes {
 
     //display members of a tribe
     public static void displayTribeMembers(char tribe, String session) throws SQLException{
-        String query = "SELECT * FROM tribe WHERE tribe_name = \"tribe " + tribe + "\" and " +
+        String query = "SELECT * FROM tribe WHERE tribe_name = \"" + tribe + "\" and " +
                 "session_month = \"" + session + "\";";
 
         statement = connection.prepareStatement(query);
