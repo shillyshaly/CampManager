@@ -24,6 +24,8 @@ public class Tribes {
         //MySQL query to insert into tribe
         String query = "INSERT INTO tribe VALUES (?, ?, ?, ?, ?, ?);";
 
+        //displays all tribes and members
+        displayAll();
         //show numbers for each tribe
         displayCount();
 
@@ -84,7 +86,7 @@ public class Tribes {
     //move tribe
     public static void moveTribes(char tribe, String fname, String lname) throws SQLException {
 
-        String query = "UPDATE tribe SET tribe_name = \"tribe " + tribe + "\" where camper_fname = \"" + fname + "\" and " +
+        String query = "UPDATE tribe SET tribe_name = \"" + tribe + "\" where camper_fname = \"" + fname + "\" and " +
                 "camper_lname = \"" + lname + "\";";
 
         statement = connection.prepareStatement(query);
@@ -103,10 +105,10 @@ public class Tribes {
     //tribe count
     public static void displayCount () throws SQLException {
         //getting the count of each tribe
-        String tribeA = "select count(*) as total from tribe where tribe_name = \"tribe a\";";
-        String tribeB = "select count(*) as total from tribe where tribe_name = \"tribe b\";";
-        String tribeC = "select count(*) as total from tribe where tribe_name = \"tribe c\";";
-        String tribeD = "select count(*) as total from tribe where tribe_name = \"tribe d\";";
+        String tribeA = "select count(*) as total from tribe where tribe_name = \"a\";";
+        String tribeB = "select count(*) as total from tribe where tribe_name = \"b\";";
+        String tribeC = "select count(*) as total from tribe where tribe_name = \"c\";";
+        String tribeD = "select count(*) as total from tribe where tribe_name = \"d\";";
 
         int aCount = getCount(tribeA);
         int bCount = getCount(tribeB);
@@ -128,6 +130,15 @@ public class Tribes {
     public static void displayTribeMembers(char tribe, String session) throws SQLException{
         String query = "SELECT * FROM tribe WHERE tribe_name = \"" + tribe + "\" and " +
                 "session_month = \"" + session + "\";";
+
+        statement = connection.prepareStatement(query);
+        rs = statement.executeQuery(query);
+        displayRS(rs);
+    }
+
+    //display all tribes and members
+    public static void displayAll() throws SQLException {
+        String query = "SELECT * FROM tribe;";
 
         statement = connection.prepareStatement(query);
         rs = statement.executeQuery(query);
