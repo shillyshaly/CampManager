@@ -15,7 +15,9 @@ public class Main {
         //MySQL connection
         MySQLConnect.mySQLConn();
 
-        while (exitCode == 0) {
+        MenuList.mainMenu();
+
+        /*while (exitCode == 0) {
             //get the main menu
             int menuChoice = MenuList.mainMenu();
 
@@ -47,6 +49,6 @@ public class Main {
                     break;
                 default:
             }
-        }
+        }*/
     }
 }
