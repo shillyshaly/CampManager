@@ -111,7 +111,9 @@ public class Camper {
 
         statement = connection.prepareStatement(query);
         rs = statement.executeQuery(query);
-        rs.next();
+        if (!rs.next()){
+            rs = null;
+        }
 
         return rs;
     }

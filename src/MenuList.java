@@ -1,4 +1,5 @@
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class MenuList {
@@ -93,11 +94,18 @@ public class MenuList {
                 Tribes.displayCount();
                 break;
             case 4:
-                System.out.println("Enter tribe to display (a - d): ");
-                tribe = scanner.next().charAt(0);
-                System.out.println("For which session (June, July, August):");
-                String session = scanner.next();
-                Tribes.displayTribeMembers(tribe, session);
+                System.out.println("Enter tribe to display (a-d or z to view all): ");
+
+                tribe = scanner.next().toLowerCase(Locale.ROOT).charAt(0);
+
+                if (tribe == 'z'){
+                    Tribes.displayAll();
+                }else{
+                    System.out.println("For which session (June, July, August): ");
+                    String session = scanner.next();
+
+                    Tribes.displayTribeMembers(tribe, session);
+                }
                 break;
             case 5:
                 System.out.println("Leaving Tribes Menu...");

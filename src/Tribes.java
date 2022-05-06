@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Tribes {
@@ -24,8 +25,13 @@ public class Tribes {
         //MySQL query to insert into tribe
         String query = "INSERT INTO tribe VALUES (?, ?, ?, ?, ?, ?);";
 
-        //displays all tribes and members
-        displayAll();
+        System.out.println("Would you like to display all campers currently in tribes (yes/no)?");
+        String choice = scanner.next();
+        if (choice.toLowerCase().equals("yes")){
+            //displays all tribes and members
+            displayAll();
+        }
+
         //show numbers for each tribe
         displayCount();
 
@@ -36,12 +42,15 @@ public class Tribes {
         System.out.println("Enter tribe to add camper to (a - d): ");
         char tribe = scanner.next().charAt(0);
 
-        //test area
         ResultSet camper = Camper.getCamperDeats(fname, lname);
+
+        if (camper == null){
+            System.out.println("Camper hasn't been checked in yet.\n\n\n");
+            return;
+        }
+
         String session = camper.getString("session_month");
         int age = camper.getInt("camper_age");
-
-
 
         System.out.println("Are there any special requests?: ");
         scanner.nextLine();
@@ -64,9 +73,10 @@ public class Tribes {
 
     //display resultSet
     public static void displayRS(ResultSet rs) throws SQLException {
+
         System.out.println("+-------------------+-------------------+--------------------+---------------------" +
                 "+------------+-----------------------------------------------+");
-        while (rs.next()){
+        while (rs.next()) {
             //save and parse query response
             String tr = rs.getString("tribe_name");
             String fname = rs.getString("camper_fname");
@@ -76,7 +86,7 @@ public class Tribes {
             int age = rs.getInt("camper_age");
 
             //print the result set
-            System.out.format("| Tribe: %-10s | First: %-10s | Last: %-12s | Session: %-10s | Age: %-5s | " +
+            System.out.format("| Tribe: %-10s | First: %-10s | Last: %-12s | Session: %-10s | Age: %-7s | " +
                     "Special Req: %-32s |\n", tr, fname, lname, sess, age, spReq);
         }
         System.out.println("+-------------------+-------------------+--------------------+---------------------" +
@@ -102,7 +112,7 @@ public class Tribes {
         return rs.getInt("total");
     }
 
-    //tribe count
+    //tribe display count
     public static void displayCount () throws SQLException {
         //getting the count of each tribe
         String tribeA = "select count(*) as total from tribe where tribe_name = \"a\";";
