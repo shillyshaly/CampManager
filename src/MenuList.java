@@ -81,13 +81,13 @@ public class MenuList {
 
     }
 
-    public static void bunkHouseMenu(){
+    public static void bunkHouseMenu() throws SQLException {
         System.out.println("******************************\n" +
                 "**********Bunkhouse Menu*********\n" +
-                "* 1. Add a new Application\n" +
-                "* 2. See Applicants\n" +
-                "* 3. Delete Applicant\n" +
-                "* 4. Camper details by name\n" +
+                "* 1. Add Camper to Bunkhouse\n" +
+                "* 2. Display Bunkhouse\n" +
+                "* 3. Delete from Bunkhouse\n" +
+                "* 4. Empty Menu Item\n" +
                 "* 5. Return to Main Menu\n" +
                 "******************************\n");
 
@@ -104,8 +104,8 @@ public class MenuList {
                 System.out.println("Bunkhouse Menu");
                 break;
             case 3:
-                //tribesMenu();
-                System.out.println("Tribes Menu");
+                tribesMenu();
+                //System.out.println("Tribes Menu");
                 break;
             case 4:
                 //checkInMenu();
