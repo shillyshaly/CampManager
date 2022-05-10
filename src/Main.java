@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.sql.*;
+import java.text.ParseException;
 import java.util.Scanner;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException, IOException {
+    public static void main(String[] args) throws SQLException, IOException, ParseException {
         int exitCode = 0;
         //MySQL connection
         MySQLConnect.mySQLConn();

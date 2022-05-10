@@ -43,6 +43,9 @@ public class Tribes {
         char tribe = scanner.next().charAt(0);
 
         ResultSet camper = Camper.getCamperDeats(fname, lname);
+        if (!camper.next()){
+            camper = null;
+        }
 
         if (camper == null){
             System.out.println("Camper hasn't been checked in yet.\n\n\n");

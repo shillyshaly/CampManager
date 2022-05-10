@@ -1,10 +1,12 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class MenuList {
-    public static void mainMenu() throws SQLException {
+    public static void mainMenu() throws SQLException, ParseException {
+        System.out.println("\n\n");
         System.out.println("******************************\n" +
                 "* 1. Applications\n" +
                 "* 2. Bunkhouse\n" +
@@ -41,10 +43,10 @@ public class MenuList {
                 System.out.println("You've entered an invalid input. Please try again.");
         }
         mainMenu();
-        System.out.println("\n\n");
     }
 
-    public static void camperMenu() throws SQLException {
+    public static void camperMenu() throws SQLException, ParseException {
+        System.out.println("\n\n");
         System.out.println("******************************\n" +
                 "**********Camp Menu*********\n" +
                 "* 1. Add a new Application\n" +
@@ -58,22 +60,46 @@ public class MenuList {
         Scanner scanner = new Scanner(System.in);
         menuChoice = scanner.nextInt();
 
+        String fname, lname, dob, complete, session, gender;
+        int age;
+
         switch (menuChoice) {
             case 1:
-                Camper.newCamper();
+                scanner = new Scanner(System.in);
+                System.out.println("enter first name: ");
+                fname = scanner.next().toLowerCase();
+                System.out.println("enter last name: ");
+                lname = scanner.next().toLowerCase();
+                System.out.println("enter age: ");
+                age = scanner.nextInt();
+                System.out.println("enter date of birth (ex. YYYY-MM-DD): ");
+                dob = scanner.next().toLowerCase();
+                System.out.println("enter completed docs(y/n): ");
+                complete = scanner.next().toLowerCase();
+                System.out.println("enter session month (ex. august");
+                session = scanner.next().toLowerCase();
+                System.out.println("enter gender (ex. male/female): ");
+                gender = scanner.next().toLowerCase();
+                Camper.newCamper(fname, lname, age, dob, complete, session, gender);
                 break;
             case 2:
                 Camper.getCampers();
                 break;
             case 3:
-                Camper.delCamper();
+                System.out.println("Enter first name of camper to be deleted: ");
+                scanner = new Scanner(System.in);
+                fname = scanner.next();
+                System.out.println("Enter last name: ");
+                lname = scanner.next();
+                Camper.delCamper(fname, lname);
                 break;
             case 4:
                 System.out.println("Which camper's information would you like to see? (ex \"billy jones\"): ");
-                String fname = scanner.next();
-                String lname = scanner.next();
+                fname = scanner.next().toLowerCase();
+                lname = scanner.next().toLowerCase();
                 ResultSet rs = Camper.getCamperDeats(fname, lname);
-                Tribes.displayRS(rs);
+                Camper.displayRS(rs);
+
                 break;
             case 5:
                 mainMenu();
@@ -82,10 +108,10 @@ public class MenuList {
                 System.out.println("You've entered an invalid input. Please try again.");
         }
         camperMenu();
-        System.out.println("\n\n");
     }
 
-    public static void bunkHouseMenu() throws SQLException {
+    public static void bunkHouseMenu() throws SQLException, ParseException {
+        System.out.println("\n\n");
         System.out.println("******************************\n" +
                 "**********Bunkhouse Menu*********\n" +
                 "* 1. Add a new Application\n" +
@@ -121,10 +147,10 @@ public class MenuList {
                 System.out.println("You've entered an invalid input. Please try again.");
         }
         bunkHouseMenu();
-        System.out.println("\n\n");
     }
 
-    public static void tribesMenu() throws SQLException {
+    public static void tribesMenu() throws SQLException, ParseException {
+        System.out.println("\n\n");
         System.out.println("******************************\n" +
                 "**********Tribes Menu*********\n" +
                 "* 1. Add camper to tribe\n" +
@@ -178,10 +204,10 @@ public class MenuList {
                 break;
         }
         tribesMenu();
-        System.out.println("\n\n");
     }
 
-    public static void checkInMenu() throws SQLException {
+    public static void checkInMenu() throws SQLException, ParseException {
+        System.out.println("\n\n");
         System.out.println("******************************\n" +
                 "**********Check-in Day Menu*********\n" +
                 "* 1. Add a new Application\n" +
