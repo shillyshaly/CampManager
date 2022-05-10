@@ -1,8 +1,6 @@
-<<<<<<< Updated upstream
-=======
+
 import java.sql.SQLException;
 import java.text.ParseException;
->>>>>>> Stashed changes
 import java.util.Scanner;
 
 public class MenuList {
@@ -13,11 +11,7 @@ public class MenuList {
                 "* 3. Delete by name\n" +
                 "* 4. Camper details by name\n" +
                 "* 5. Exit\n" +
-<<<<<<< Updated upstream
-                "******************************\n");
-=======
                 "******************************\n\n\n");
->>>>>>> Stashed changes
         int menuChoice = 0;
 
         Scanner scanner = new Scanner(System.in);
@@ -25,17 +19,6 @@ public class MenuList {
         return menuChoice;
     }
 
-<<<<<<< Updated upstream
-    public static int camperMenu(){
-        System.out.println("******************************\n" +
-                "**********Camp Menu*********\n" +
-                "* 1. Add a new camper\n" +
-                "* 2. See campers\n" +
-                "* 3. Delete by name\n" +
-                "* 4. Camper details by name\n" +
-                "* 5. Exit\n" +
-                "******************************\n");
-=======
     public static int camperMenu() throws SQLException, ParseException {
         System.out.println("******************************\n" + "*      Camper Menu           *\n" +
                 "+****************************+\n" +
@@ -77,8 +60,6 @@ public class MenuList {
 
                 "* 5. Exit\n" +
                 "******************************\n\n\n");
-        int menuChoice = 0;
->>>>>>> Stashed changes
 
         int menuChoice = 0;
         Scanner scanner = new Scanner(System.in);

@@ -51,12 +51,8 @@ public class Camper {
         String lname = scanner.next();
         System.out.println("enter age: ");
         int age = scanner.nextInt();
-<<<<<<< Updated upstream
         System.out.println("enter bunk house(a-e): ");
         String house = scanner.next();
-        System.out.println("enter completed docs(y/n): ");
-        String complete = scanner.next();
-=======
 
         System.out.println("enter date of birth (ex. yyyy-mm-dd): ");
         String birthday = scanner.next();
@@ -72,7 +68,6 @@ public class Camper {
 
         System.out.println("enter gender (ex. male/female): ");
         String gender = scanner.next();
->>>>>>> Stashed changes
 
         System.out.println("enter session month by typing the month the session takes place. (August, June, or July");
         String session = scanner.next();
@@ -201,11 +196,8 @@ public class Camper {
         statement.setString(1, fname);
         statement.setString(2, lname);
         statement.setInt(3, age);
-<<<<<<< Updated upstream
         statement.setString(4, house);
-=======
         statement.setString(4, birthday);
->>>>>>> Stashed changes
         statement.setString(5, complete);
 
 //        System.out.println(statement);
@@ -328,8 +320,6 @@ public class Camper {
 //        System.exit(0);
     }
 */
-
->>>>>>> Stashed changes
     public static void delCamper() throws SQLException {
         System.out.println("Enter first name of camper to be deleted: ");
         Scanner scanner = new Scanner(System.in);
