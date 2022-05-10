@@ -49,8 +49,6 @@ public class Camper {
         String fname = scanner.next();
         System.out.println("enter last name: ");
         String lname = scanner.next();
-        System.out.println("enter age: ");
-        int age = scanner.nextInt();
         System.out.println("enter bunk house(a-e): ");
         String house = scanner.next();
 
@@ -65,6 +63,8 @@ public class Camper {
             System.out.println("Application Rejected. Either too young or too old to join camp");
             return;
         }
+
+        int age = period.getYears();
 
         System.out.println("enter gender (ex. male/female): ");
         String gender = scanner.next();
