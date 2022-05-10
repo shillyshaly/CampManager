@@ -3,7 +3,7 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class MenuList {
-    public static void mainMenu(){
+    public static void mainMenu() throws SQLException {
         System.out.println("******************************\n" +
                 "* 1. Applications\n" +
                 "* 2. Bunkhouse\n" +
@@ -16,96 +16,15 @@ public class MenuList {
         Scanner scanner = new Scanner(System.in);
         menuChoice = scanner.nextInt();
 
-        switch (menuChoice){
+        switch (menuChoice) {
             case 1:
                 camperMenu();
                 break;
             case 2:
-                //bunkHouseMenu();
-                System.out.println("Bunkhouse Menu");
-                break;
-            case 3:
-                //tribesMenu();
-                System.out.println("Tribes Menu");
-                break;
-            case 4:
-                //checkInMenu();
-                System.out.println("Check-in Menu");
-                break;
-            case 5:
-                System.out.println("Exiting program...");
-                System.exit(0);
-            default:
-                System.out.println("You've entered an invalid input. Please try again.");
-                mainMenu();
-        }
-    }
-
-    public static void camperMenu(){
-        System.out.println("******************************\n" +
-                "**********Camp Menu*********\n" +
-                "* 1. Add a new Application\n" +
-                "* 2. See Applicants\n" +
-                "* 3. Delete Applicant\n" +
-                "* 4. Camper details by name\n" +
-                "* 5. Return to Main Menu\n" +
-                "******************************\n");
-
-        int menuChoice = 0;
-        Scanner scanner = new Scanner(System.in);
-        menuChoice = scanner.nextInt();
-
-        switch (menuChoice){
-            case 1:
-                camperMenu();
-                break;
-            case 2:
-                //bunkHouseMenu();
-                System.out.println("Bunkhouse Menu");
-                break;
-            case 3:
-                //tribesMenu();
-                System.out.println("Tribes Menu");
-                break;
-            case 4:
-                //checkInMenu();
-                System.out.println("Check-in Menu");
-                break;
-            case 5:
-                mainMenu();
-                break;
-            default:
-                System.out.println("You've entered an invalid input. Please try again.");
-                camperMenu();
-        }
-
-    }
-
-    public static void bunkHouseMenu() throws SQLException {
-        System.out.println("******************************\n" +
-                "**********Bunkhouse Menu*********\n" +
-                "* 1. Add Camper to Bunkhouse\n" +
-                "* 2. Display Bunkhouse\n" +
-                "* 3. Delete from Bunkhouse\n" +
-                "* 4. Empty Menu Item\n" +
-                "* 5. Return to Main Menu\n" +
-                "******************************\n");
-
-        int menuChoice = 0;
-        Scanner scanner = new Scanner(System.in);
-        menuChoice = scanner.nextInt();
-
-        switch (menuChoice){
-            case 1:
-                camperMenu();
-                break;
-            case 2:
-                //bunkHouseMenu();
-                System.out.println("Bunkhouse Menu");
+                bunkHouseMenu();
                 break;
             case 3:
                 tribesMenu();
-                //System.out.println("Tribes Menu");
                 break;
             case 4:
                 //checkInMenu();
@@ -119,6 +38,89 @@ public class MenuList {
                 mainMenu();
         }
     }
+
+    public static void camperMenu() throws SQLException {
+        boolean screenMenu = true;
+
+        while(screenMenu == true) {
+            System.out.println("******************************\n" +
+                    "**********Camp Menu***********\n" +
+                    "* 1. Add a new Application\n" +
+                    "* 2. See Applicants\n" +
+                    "* 3. Delete Applicant\n" +
+                    "* 4. Camper details by name\n" +
+                    "* 5. Return to Main Menu\n" +
+                    "******************************\n");
+
+            int menuChoice = 0;
+
+            Scanner scanner = new Scanner(System.in);
+            menuChoice = scanner.nextInt();
+
+
+            switch (menuChoice) {
+                case 1:
+                    Camper.newCamper();
+                    break;
+                case 2:
+                    Camper.getCampers();
+                    break;
+                case 3:
+                    Camper.delCamper();
+                    break;
+                case 4:
+                    //checkInMenu();
+                    System.out.println("Check-in Menu");
+                    break;
+                case 5:
+                    screenMenu = false;
+                    mainMenu();
+                    break;
+                default:
+                    System.out.println("You've entered an invalid input. Please try again.");
+            }
+        }
+    }
+
+
+    public static void bunkHouseMenu() throws SQLException {
+        boolean screenMenu = true;
+
+        while(screenMenu == true) {
+            System.out.println("******************************\n" +
+                    "**********Bunkhouse Menu*********\n" +
+                    "* 1. Add Camper to Bunkhouse\n" +
+                    "* 2. Display Bunkhouse\n" +
+                    "* 3. Delete from Bunkhouse\n" +
+                    "* 4. Return to Main Menu\n" +
+                    "******************************\n");
+
+            int menuChoice = 0;
+            Scanner scanner = new Scanner(System.in);
+            menuChoice = scanner.nextInt();
+
+            switch (menuChoice) {
+                case 1:
+                    Bunkhouses.addToBunk();
+                    break;
+                case 2:
+                    Bunkhouses.displayBunkhouses();
+                    break;
+                case 3:
+                    Bunkhouses.deleteFromBunk();
+                    break;
+                case 4:
+                    screenMenu = false;
+                    System.out.println("Returning to Main Menu");
+                    mainMenu();
+                    break;
+                default:
+                    System.out.println("You've entered an invalid input. Please try again.");
+                    break;
+            }
+        }
+    }
+
     public static void tribesMenu() throws SQLException {
         System.out.println("******************************\n" +
                 "**********Tribes Menu*********\n" +
@@ -137,7 +139,7 @@ public class MenuList {
         String lname;
         char tribe;
 
-        switch (menuChoice){
+        switch (menuChoice) {
             case 1:
                 Tribes.addToTribe();
                 break;
@@ -158,9 +160,9 @@ public class MenuList {
 
                 tribe = scanner.next().toLowerCase(Locale.ROOT).charAt(0);
 
-                if (tribe == 'z'){
+                if (tribe == 'z') {
                     Tribes.displayAll();
-                }else{
+                } else {
                     System.out.println("For which session (June, July, August): ");
                     String session = scanner.next();
 
@@ -174,7 +176,8 @@ public class MenuList {
 
 
     }
-    public static void checkInMenu(){
+
+    public static void checkInMenu() throws SQLException {
         System.out.println("******************************\n" +
                 "**********Check-in Day Menu*********\n" +
                 "* 1. Add a new Application\n" +
@@ -188,7 +191,7 @@ public class MenuList {
         Scanner scanner = new Scanner(System.in);
         menuChoice = scanner.nextInt();
 
-        switch (menuChoice){
+        switch (menuChoice) {
             case 1:
                 camperMenu();
                 break;
