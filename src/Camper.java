@@ -56,8 +56,6 @@ public class Camper {
         connection.commit();
     }
 
-
-
     public static void delCamper() throws SQLException {
         System.out.println("Enter first name of camper to be deleted: ");
         Scanner scanner = new Scanner(System.in);
@@ -85,22 +83,8 @@ public class Camper {
         statement = connection.prepareStatement(query);
         rs = statement.executeQuery(query);
 
-        while (rs.next()) {
-            //save and parse the query response
-            int id = rs.getInt("camper_id");
-            String fname = rs.getString("camper_fname");
-            String lname = rs.getString("camper_lname");
-            int age = rs.getInt("camper_age");
-            String dob = rs.getString("camper_dob");
-            String complete = rs.getString("camper_docs");
-            String session = rs.getString("session_month");
-            String gender = rs.getString("camper_gender");
+        displayRS(rs);
 
-            //print the results of query
-            System.out.format("ID: %-5s First: %-10s Last: %-12s Age: %-3s D.O.B.: %-12s " +
-                    "Completed docs: %-3s Session: %-10s Gender: %-10s\n" +
-                    "", id, fname, lname, age, dob, complete, session, gender);
-        }
         statement.close();
         System.out.println("\n\n");
     }
@@ -116,5 +100,29 @@ public class Camper {
         }
 
         return rs;
+    }
+
+    public static void displayRS(ResultSet rs) throws SQLException {
+        System.out.println("+-----------+-------------------+--------------------+-----------+-----------------" +
+                "-----+---------------------+---------------------+--------------------+");
+
+        while (rs.next()) {
+            //save and parse the query response
+            int id = rs.getInt("camper_id");
+            String fname = rs.getString("camper_fname");
+            String lname = rs.getString("camper_lname");
+            int age = rs.getInt("camper_age");
+            String dob = rs.getString("camper_dob");
+            String complete = rs.getString("camper_docs");
+            String session = rs.getString("session_month");
+            String gender = rs.getString("camper_gender");
+
+            //print the results of query
+            System.out.format("| ID: %-5s | First: %-10s | Last: %-12s | Age: %-4s | D.O.B.: %-12s | " +
+                    "Completed docs: %-3s | Session: %-10s | Gender: %-10s |\n" +
+                    "", id, fname, lname, age, dob, complete, session, gender);
+        }
+        System.out.println("+-----------+-------------------+--------------------+-----------+-----------------" +
+                "-----+---------------------+---------------------+--------------------+");
     }
 }
