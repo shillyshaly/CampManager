@@ -41,12 +41,13 @@ public class Tribes {
         System.out.println("    Type 'exit' at any time to leave");
         String fname = scanner.next();
         String lname = scanner.next();
+        if ((checkForExit(fname) || checkForExit(lname))){
+            MenuList.tribesMenu();
+        }
         System.out.println("Enter tribe to add camper to (a - d): ");
         char tribe = scanner.next().charAt(0);
-
-        //if exit, leave to main menu
-        if (fname.equals("exit") || lname.equals("exit") || tribe == 'e'){
-            MenuList.mainMenu();
+        if (checkForExit(String.valueOf(tribe))){
+            MenuList.tribesMenu();
         }
 
         ResultSet camper = Camper.getCamperDeats(fname, lname);
@@ -177,5 +178,13 @@ public class Tribes {
         rs = statement.executeQuery(query);
         Camper.displayRS(rs);
 
+    }
+
+    public static boolean checkForExit(String exitCode) throws SQLException, ParseException {
+        boolean exit = false;
+        if (exitCode.equals("exit") || exitCode.equals("e")){
+            exit = true;
+        }
+        return exit;
     }
 }

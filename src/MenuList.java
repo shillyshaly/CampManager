@@ -137,8 +137,11 @@ public class MenuList {
                     Bunkhouses.addToBunk();
                     break;
                 case 2:
-                    //Bunkhouses.displayBunkhouses();
-                    System.out.println("Displays Bunkhouses");
+                    System.out.println("Enter name of camper (ex. timmy jones): ");
+                    String fname = scanner.next();
+                    String lname = scanner.next();
+
+//                    Bunkhouses.displayBunkhouses();
                     break;
                 case 3:
                     Bunkhouses.deleteFromBunk();
@@ -187,6 +190,13 @@ public class MenuList {
                     System.out.println("Enter camper's new tribe: ");
                     scanner.nextLine();
                     tribe = scanner.next().charAt(0);
+
+                    //checks for exit call
+                    if (Tribes.checkForExit(fname) || Tribes.checkForExit(lname) || Tribes.checkForExit(String.valueOf(tribe))){
+                        MenuList.tribesMenu();
+                    }
+
+                    //move tribe function call
                     Tribes.moveTribes(tribe, fname, lname);
                     break;
                 case 3:

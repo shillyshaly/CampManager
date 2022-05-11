@@ -21,7 +21,7 @@ CREATE TABLE `bunkhouse`
     `camper_lname`  VARCHAR (32),
     `camper_gender` VARCHAR (10),
     PRIMARY KEY (`bunk_id`)
-)
+)  ENGINE=INNODB;
 
 CREATE TABLE `tribe` (
     `tribe_name` CHAR,
@@ -31,4 +31,4 @@ CREATE TABLE `tribe` (
     `special_req` VARCHAR (255),
     `camper_age` INT,
     PRIMARY KEY (`tribe_name`)
-)
+) ENGINE=INNODB;
