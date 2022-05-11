@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.text.ParseException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -21,14 +22,14 @@ public class Tribes {
     static Scanner scanner = new Scanner(System.in);
 
     //add to tribe
-    public static void addToTribe() throws SQLException {
+    public static void addToTribe() throws SQLException, ParseException {
         //MySQL query to insert into tribe
         String query = "INSERT INTO tribe VALUES (?, ?, ?, ?, ?, ?);";
 
         System.out.println("Would you like to display all campers not currently in tribes (yes/no)?");
         String choice = scanner.next();
         if (choice.toLowerCase().equals("yes")){
-            //displays all tribes and members
+            //displays all tribes and members NOT currently in tribes.
             diffInTables();
         }
 
@@ -37,10 +38,16 @@ public class Tribes {
 
         //get user input for name and tribe to add to
         System.out.println("Enter camper name to add (ex. billy thompson): ");
+        System.out.println("    Type 'exit' at any time to leave");
         String fname = scanner.next();
         String lname = scanner.next();
         System.out.println("Enter tribe to add camper to (a - d): ");
         char tribe = scanner.next().charAt(0);
+
+        //if exit, leave to main menu
+        if (fname.equals("exit") || lname.equals("exit") || tribe == 'e'){
+            MenuList.mainMenu();
+        }
 
         ResultSet camper = Camper.getCamperDeats(fname, lname);
         if (!camper.next()){

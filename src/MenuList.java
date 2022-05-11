@@ -38,8 +38,8 @@ public class MenuList {
                 case 5:
                     System.out.println("Exiting program...");
                     screenMenu = false;
+                    System.exit(0);
                     break;
-                //System.exit(0);
                 default:
                     System.out.println("You've entered an invalid input. Please try again.");
                     break;
