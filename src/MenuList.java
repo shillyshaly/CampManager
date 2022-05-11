@@ -4,38 +4,44 @@ import java.util.Scanner;
 
 public class MenuList {
     public static void mainMenu() throws SQLException {
-        System.out.println("******************************\n" +
-                "* 1. Applications\n" +
-                "* 2. Bunkhouse\n" +
-                "* 3. Tribe\n" +
-                "* 4. Arrival Day\n" +
-                "* 5. Exit\n" +
-                "******************************\n");
-        int menuChoice = 0;
+        boolean screenMenu = true;
 
-        Scanner scanner = new Scanner(System.in);
-        menuChoice = scanner.nextInt();
+        while(screenMenu == true) {
+            System.out.println("******************************\n" +
+                    "* 1. Applications\n" +
+                    "* 2. Bunkhouse\n" +
+                    "* 3. Tribe\n" +
+                    "* 4. Arrival Day\n" +
+                    "* 5. Exit\n" +
+                    "******************************\n");
+            int menuChoice = 0;
 
-        switch (menuChoice) {
-            case 1:
-                camperMenu();
-                break;
-            case 2:
-                bunkHouseMenu();
-                break;
-            case 3:
-                tribesMenu();
-                break;
-            case 4:
-                //checkInMenu();
-                System.out.println("Check-in Menu");
-                break;
-            case 5:
-                System.out.println("Exiting program...");
-                System.exit(0);
-            default:
-                System.out.println("You've entered an invalid input. Please try again.");
-                mainMenu();
+            Scanner scanner = new Scanner(System.in);
+            menuChoice = scanner.nextInt();
+
+            switch (menuChoice) {
+                case 1:
+                    camperMenu();
+                    break;
+                case 2:
+                    bunkHouseMenu();
+                    break;
+                case 3:
+                    tribesMenu();
+                    break;
+                case 4:
+                    //checkInMenu();
+                    System.out.println("Check-in Menu");
+                    break;
+                case 5:
+                    System.out.println("Exiting program...");
+                    screenMenu = false;
+                    break;
+                    //System.exit(0);
+                default:
+                    System.out.println("You've entered an invalid input. Please try again.");
+                    break;
+            }
         }
     }
 
@@ -122,59 +128,63 @@ public class MenuList {
     }
 
     public static void tribesMenu() throws SQLException {
-        System.out.println("******************************\n" +
-                "**********Tribes Menu*********\n" +
-                "* 1. Add camper to tribe\n" +
-                "* 2. Move camper to new tribe\n" +
-                "* 3. Return tribe count\n" +
-                "* 4. Display tribe members\n" +
-                "* 5. Return to Main Menu\n" +
-                "******************************\n");
+        boolean screenMenu = true;
 
-        int menuChoice = 0;
-        Scanner scanner = new Scanner(System.in);
-        menuChoice = scanner.nextInt();
+        while(screenMenu == true) {
+            System.out.println("******************************\n" +
+                    "**********Tribes Menu*********\n" +
+                    "* 1. Add camper to tribe\n" +
+                    "* 2. Move camper to new tribe\n" +
+                    "* 3. Return tribe count\n" +
+                    "* 4. Display tribe members\n" +
+                    "* 5. Return to Main Menu\n" +
+                    "******************************\n");
 
-        String fname;
-        String lname;
-        char tribe;
+            int menuChoice = 0;
+            Scanner scanner = new Scanner(System.in);
+            menuChoice = scanner.nextInt();
 
-        switch (menuChoice) {
-            case 1:
-                Tribes.addToTribe();
-                break;
-            case 2:
-                System.out.println("Enter name of camper to move: ");
-                fname = scanner.next();
-                lname = scanner.next();
-                System.out.println("Enter camper's new tribe: ");
-                scanner.nextLine();
-                tribe = scanner.next().charAt(0);
-                Tribes.moveTribes(tribe, fname, lname);
-                break;
-            case 3:
-                Tribes.displayCount();
-                break;
-            case 4:
-                System.out.println("Enter tribe to display (a-d or z to view all): ");
+            String fname;
+            String lname;
+            char tribe;
 
-                tribe = scanner.next().toLowerCase(Locale.ROOT).charAt(0);
+            switch (menuChoice) {
+                case 1:
+                    Tribes.addToTribe();
+                    break;
+                case 2:
+                    System.out.println("Enter name of camper to move: ");
+                    fname = scanner.next();
+                    lname = scanner.next();
+                    System.out.println("Enter camper's new tribe: ");
+                    scanner.nextLine();
+                    tribe = scanner.next().charAt(0);
+                    Tribes.moveTribes(tribe, fname, lname);
+                    break;
+                case 3:
+                    Tribes.displayCount();
+                    break;
+                case 4:
+                    System.out.println("Enter tribe to display (a-d or z to view all): ");
 
-                if (tribe == 'z') {
-                    Tribes.displayAll();
-                } else {
-                    System.out.println("For which session (June, July, August): ");
-                    String session = scanner.next();
+                    tribe = scanner.next().toLowerCase(Locale.ROOT).charAt(0);
 
-                    Tribes.displayTribeMembers(tribe, session);
-                }
-                break;
-            case 5:
-                System.out.println("Leaving Tribes Menu...");
-                break;
+                    if (tribe == 'z') {
+                        Tribes.displayAll();
+                    } else {
+                        System.out.println("For which session (June, July, August): ");
+                        String session = scanner.next();
+
+                        Tribes.displayTribeMembers(tribe, session);
+                    }
+                    break;
+                case 5:
+                    screenMenu = false;
+                    System.out.println("Leaving Tribes Menu...");
+                    mainMenu();
+                    break;
+            }
         }
-
-
     }
 
     public static void checkInMenu() throws SQLException {
