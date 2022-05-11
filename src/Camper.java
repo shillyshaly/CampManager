@@ -1,5 +1,3 @@
-//import com.mysql.cj.util.StringUtils;
-
 import java.sql.*;
 import java.text.ParseException;
 import java.time.LocalDate;
@@ -48,9 +46,9 @@ public class Camper {
         totalCount = getTotalCount(session);
 
         //test male count
-        System.out.println("male count: " + maleCount);
-        System.out.println("female count: " + femaleCount);
-        System.out.println("total count: "+ totalCount);
+//        System.out.println("male count: " + maleCount);
+//        System.out.println("female count: " + femaleCount);
+//        System.out.println("total count: "+ totalCount);
         //end test count
 
         //check total count

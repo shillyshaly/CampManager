@@ -60,11 +60,6 @@ class CamperTest {
     }
 
 
-//    @org.junit.jupiter.api.Test
-//    void getMaleCount() throws SQLException{
-//
-//    }
-
 
     @org.junit.jupiter.api.Test
     void delCamper() throws SQLException {

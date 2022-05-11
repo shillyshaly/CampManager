@@ -25,11 +25,11 @@ public class Tribes {
         //MySQL query to insert into tribe
         String query = "INSERT INTO tribe VALUES (?, ?, ?, ?, ?, ?);";
 
-        System.out.println("Would you like to display all campers currently in tribes (yes/no)?");
+        System.out.println("Would you like to display all campers not currently in tribes (yes/no)?");
         String choice = scanner.next();
         if (choice.toLowerCase().equals("yes")){
             //displays all tribes and members
-            displayAll();
+            diffInTables();
         }
 
         //show numbers for each tribe
@@ -59,7 +59,7 @@ public class Tribes {
         scanner.nextLine();
         String spReq = scanner.nextLine();
 
-        //prep statment
+        //prep statement
         statement = connection.prepareStatement(query);
         statement.setString(1, String.valueOf(tribe));
         statement.setString(2, fname);
@@ -156,5 +156,19 @@ public class Tribes {
         statement = connection.prepareStatement(query);
         rs = statement.executeQuery(query);
         displayRS(rs);
+    }
+
+    //get the difference between tables
+    public static void diffInTables() throws SQLException {
+        String query = "SELECT * " +
+                "FROM camper " +
+                "WHERE ROW (camper.camper_fname, camper.camper_lname) NOT IN " +
+                "(SELECT camper_fname, camper_lname " +
+                "FROM tribe);";
+
+        statement = connection.prepareStatement(query);
+        rs = statement.executeQuery(query);
+        Camper.displayRS(rs);
+
     }
 }
