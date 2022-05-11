@@ -8,7 +8,7 @@ public class MenuList {
     public static void mainMenu() throws SQLException, ParseException {
         boolean screenMenu = true;
 
-        while(screenMenu == true) {
+        while(screenMenu) {
             System.out.println("******************************\n" +
                     "* 1. Applications\n" +
                     "* 2. Bunkhouse\n" +
@@ -48,7 +48,7 @@ public class MenuList {
     public static void camperMenu() throws SQLException, ParseException {
         boolean screenMenu = true;
 
-        while(screenMenu == true) {
+        while(screenMenu) {
             System.out.println("\n\n");
             System.out.println("******************************\n" +
                     "**********Camp Menu*********\n" +
@@ -119,7 +119,7 @@ public class MenuList {
     public static void bunkHouseMenu() throws SQLException, ParseException {
         boolean screenMenu = true;
 
-        while(screenMenu == true) {
+        while(screenMenu) {
             System.out.println("******************************\n" +
                     "**********Bunkhouse Menu*********\n" +
                     "* 1. Add Camper to Bunkhouse\n" +
@@ -162,7 +162,7 @@ public class MenuList {
     public static void tribesMenu() throws SQLException, ParseException {
         boolean screenMenu = true;
 
-        while(screenMenu == true) {
+        while(screenMenu) {
             System.out.println("******************************\n" +
                     "**********Tribes Menu*********\n" +
                     "* 1. Add camper to tribe\n" +
@@ -222,7 +222,7 @@ public class MenuList {
     public static void checkInMenu() throws SQLException, ParseException {
         boolean screenMenu = true;
 
-        while (screenMenu == true) {
+        while (screenMenu) {
             System.out.println("******************************\n" +
                     "**********Check-in Day Menu*********\n" +
                     "* 1. Verify Camper\n" +
@@ -241,11 +241,11 @@ public class MenuList {
                     break;
                 case 2:
                     //bunkHouseMenu();
-                    System.out.println("Bunkhouse Menu");
+                    System.out.println("Call Documentation function");
                     break;
                 case 3:
                     //tribesMenu();
-                    System.out.println("Tribes Menu");
+                    System.out.println("Call Equipment function");
                     break;
                 case 4:
                     screenMenu = false;
