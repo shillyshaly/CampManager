@@ -32,14 +32,12 @@ public class MenuList {
                     tribesMenu();
                     break;
                 case 4:
-                    //checkInMenu();
-                    System.out.println("Check-in Menu");
+                    checkInMenu();
                     break;
                 case 5:
                     System.out.println("Exiting program...");
                     screenMenu = false;
                     break;
-                    //System.exit(0);
                 default:
                     System.out.println("You've entered an invalid input. Please try again.");
                     break;
@@ -127,7 +125,8 @@ public class MenuList {
                     "* 1. Add Camper to Bunkhouse\n" +
                     "* 2. Display Bunkhouse\n" +
                     "* 3. Delete from Bunkhouse\n" +
-                    "* 4. Return to Main Menu\n" +
+                    "* 4. Display Number of Campers in Bunkhouse\n" +
+                    "* 5. Return to Main Menu\n" +
                     "******************************\n");
 
             int menuChoice = 0;
@@ -146,6 +145,9 @@ public class MenuList {
                     Bunkhouses.deleteFromBunk();
                     break;
                 case 4:
+                    Bunkhouses.numberOfCampers();
+                    break;
+                case 5:
                     screenMenu = false;
                     System.out.println("Returning to Main Menu");
                     mainMenu();
@@ -218,41 +220,43 @@ public class MenuList {
     }
 
     public static void checkInMenu() throws SQLException, ParseException {
-        System.out.println("******************************\n" +
-                "**********Check-in Day Menu*********\n" +
-                "* 1. Add a new Application\n" +
-                "* 2. See Applicants\n" +
-                "* 3. Delete Applicant\n" +
-                "* 4. Camper details by name\n" +
-                "* 5. Return to Main Menu\n" +
-                "******************************\n");
+        boolean screenMenu = true;
 
-        int menuChoice = 0;
-        Scanner scanner = new Scanner(System.in);
-        menuChoice = scanner.nextInt();
+        while (screenMenu == true) {
+            System.out.println("******************************\n" +
+                    "**********Check-in Day Menu*********\n" +
+                    "* 1. Verify Camper\n" +
+                    "* 2. Documentation\n" +
+                    "* 3. Equipment\n" +
+                    "* 4. Return to Main Menu\n" +
+                    "******************************\n");
 
-        switch (menuChoice) {
-            case 1:
-                camperMenu();
-                break;
-            case 2:
-                //bunkHouseMenu();
-                System.out.println("Bunkhouse Menu");
-                break;
-            case 3:
-                //tribesMenu();
-                System.out.println("Tribes Menu");
-                break;
-            case 4:
-                //checkInMenu();
-                System.out.println("Check-in Menu");
-                break;
-            case 5:
-                System.out.println("Exiting program...");
-                System.exit(0);
-            default:
-                System.out.println("You've entered an invalid input. Please try again.");
-                mainMenu();
+            int menuChoice = 0;
+            Scanner scanner = new Scanner(System.in);
+            menuChoice = scanner.nextInt();
+
+            switch (menuChoice) {
+                case 1:
+                    camperMenu();
+                    break;
+                case 2:
+                    //bunkHouseMenu();
+                    System.out.println("Bunkhouse Menu");
+                    break;
+                case 3:
+                    //tribesMenu();
+                    System.out.println("Tribes Menu");
+                    break;
+                case 4:
+                    screenMenu = false;
+                    System.out.println("Returning to Main Menu");
+                    mainMenu();
+                    break;
+                default:
+                    System.out.println("You've entered an invalid input. Please try again.");
+                    break;
+            }
         }
     }
+
 }
