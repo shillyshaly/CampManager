@@ -106,6 +106,7 @@ public class MenuList {
                     break;
                 case 5:
                     screenMenu = false;
+                    System.out.println("Returning to Main Menu");
                     mainMenu();
                     break;
                 default:
@@ -213,7 +214,7 @@ public class MenuList {
                     break;
                 case 5:
                     screenMenu = false;
-                    System.out.println("Leaving Tribes Menu...");
+                    System.out.println("Returning to Main Menu");
                     mainMenu();
                     break;
             }
@@ -226,7 +227,7 @@ public class MenuList {
         while (screenMenu) {
 
             System.out.println("******************************\n" +
-                    "**********Check-in Day Menu*********\n" +
+                    "****** Check-in Day Menu *****\n" +
                     "* 1. Verify Camper\n" +
                     "* 2. Documentation\n" +
                     "* 3. Equipment\n" +
@@ -239,13 +240,16 @@ public class MenuList {
 
             switch (menuChoice) {
                 case 1:
-                    System.out.println("Call Verification function");
+                    CheckIn.verify();
+                    //System.out.println("Call Verification function");
                     break;
                 case 2:
-                    System.out.println("Call Documentation function");
+                    CheckIn.documentation();
+                    //System.out.println("Call Documentation function");
                     break;
                 case 3:
-                    System.out.println("Call Equipment function");
+                    CheckIn.equipment();
+                    //System.out.println("Call Equipment function");
                     break;
                 case 4:
                     screenMenu = false;

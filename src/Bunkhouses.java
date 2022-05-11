@@ -33,7 +33,7 @@ public class Bunkhouses
         first = scanner.next();
         last = scanner.next();
 
-        System.out.println("Enter in " + first + " " + last + "'s last name:");
+        System.out.println("Enter in " + first + " " + last + "'s gender:");
         gender = scanner.next();
 
         System.out.println("Enter in which bunkhouse you want to put the camper in (Girls: 1-3; Boys: 4-6): ");
