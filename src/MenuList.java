@@ -36,7 +36,8 @@ public class MenuList {
                     break;
                 case 5:
                     System.out.println("Exiting program...");
-                    screenMenu = false;
+                    System.exit(0);
+                    //screenMenu = false;
                     break;
                 default:
                     System.out.println("You've entered an invalid input. Please try again.");
@@ -223,6 +224,7 @@ public class MenuList {
         boolean screenMenu = true;
 
         while (screenMenu) {
+
             System.out.println("******************************\n" +
                     "**********Check-in Day Menu*********\n" +
                     "* 1. Verify Camper\n" +
@@ -237,14 +239,12 @@ public class MenuList {
 
             switch (menuChoice) {
                 case 1:
-                    camperMenu();
+                    System.out.println("Call Verification function");
                     break;
                 case 2:
-                    //bunkHouseMenu();
                     System.out.println("Call Documentation function");
                     break;
                 case 3:
-                    //tribesMenu();
                     System.out.println("Call Equipment function");
                     break;
                 case 4:
